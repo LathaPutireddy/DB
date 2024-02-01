@@ -135,7 +135,7 @@ db.SHU.find({ "products.score": { $lte: 58  } })
 db.SHU.find({ "products.score: { $gt:59  } })
 
 //greaterthanequalto
-db.SHU.find({ "products.score": { $lt: 59  } })
+db.SHU.find({ "products.score": { $gte: 59  } })
 
 //in
 db.grades.find({ student_id: { $in: [654321, 546789] } })
