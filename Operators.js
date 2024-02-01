@@ -1,4 +1,4 @@
-//use simple_airbnb
+//use sample_airbnb
 //and logic
 db.listingsAndReviews.find({$and: [{amenities: "Wifi"}, {amenities: "TV"}]}); 
 
