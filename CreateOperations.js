@@ -127,6 +127,108 @@ db.birds.insertMany([
   }
  }*/
 
+//InsertOneUsingCRUD.py
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import datetime
+import pprint
+
+uri = "mongodb+srv://putireddylatha96:Plr2096@cluster0.eehlqkd.mongodb.net/"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+try:
+    # Send a ping to confirm a successful connection
+    client.admin.command('ping')
+
+    # Get reference to 'bank' database
+    db = client.bank
+
+    # Get reference to 'accounts' collection
+    accounts_collection = db.accounts
+
+    # inserting one account
+    new_account = {
+        "account_holder": "Linus Torvalds",
+        "account_id": "MDB829001337",
+        "account_type": "checking",
+        "balance": 50352434,
+        "last_updated": datetime.datetime.utcnow(),
+    }
+
+    # Write an expression that inserts the 'new_account' document into the 'accounts' collection.
+    result = accounts_collection.insert_one(new_account)
+
+    document_id = result.inserted_id
+    pprint.pprint(f"_id of inserted document: {document_id}")
+
+
+except Exception as e:
+    print(e)
+finally:
+    client.close()
+
+//*OUTPUT = lathareddy@Lathas-Air /Applications % /usr/local/bin/python3 "/Users/lathareddy/Library/Mobile Documents/com~apple~CloudDocs/D1/InsertOne.py"
+  /Users/lathareddy/Library/Mobile Documents/com~apple~CloudDocs/D1/InsertOne.py:27: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.datetime.utcnow(),
+'_id of inserted document: 65c6ebf807f0c4bc4327552c' */
+
+
+  //InsertmanyusingCRUD.py
+  from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import datetime
+
+uri = "mongodb+srv://nikshepkulli9:mongodb1234@cluster0.2z6l7np.mongodb.net/?retryWrites=true&w=majority"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+try:
+    # Send a ping to confirm a successful connection
+    client.admin.command('ping')
+
+    # Get reference to 'bank' database
+    db = client.bank
+
+    # Get reference to 'accounts' collection
+    accounts_collection = db.accounts
+
+    # inserting many accounts
+    new_accounts = [
+        {
+            "account_id": "MDB011235813",
+            "account_holder": "Ada Lovelace",
+            "account_type": "checking",
+            "balance": 60218,
+        },
+        {
+            "account_id": "MDB829000001",
+            "account_holder": "Muhammad ibn Musa al-Khwarizmi",
+            "account_type": "savings",
+            "balance": 267914296,
+        },
+    ]
+
+    # Write an expression that inserts the 'new_account' document into the 'accounts' collection.
+    result = accounts_collection.insert_many(new_accounts)
+
+    document_ids = result.inserted_ids
+    print("# of documents inserted: " + str(len(document_ids)))
+    print(f"_ids of inserted documents: {document_ids}")
+
+
+except Exception as e:
+    print(e)
+finally:
+    client.close()
+      
+/*output = lathareddy@Lathas-Air /Applications % /usr/local/bin/python3 "/Users/lathareddy/Library/Mobile Documents/com~apple~CloudDocs/D1/Insertmany.py"
+# of documents inserted: 2
+_ids of inserted documents: [ObjectId('65c6eebfa7a6db822df9e29c'), ObjectId('65c6eebfa7a6db822df9e29d')] */
+  
+
 
 
 
